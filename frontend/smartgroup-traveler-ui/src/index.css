@@ -1,0 +1,18 @@
+/* src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ✅ Custom style for react-datepicker */
+.react-datepicker__day--highlighted-custom {
+  background-color: #dcba30;
+  color: black;
+  border-radius: 50%;
+}
+
+
+/* body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+} */

@@ -1,0 +1,17 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+psycopg2-binary
+pydantic
+pydantic-settings
+python-multipart
+aiofiles
+celery
+redis
+jinja2
+python-dotenv
+email-validator        # For validating email fields
+httpx                  # For making HTTP calls if needed
+alembic                # For DB migrations if you add it later
+aiosmtplib				#smtp lib
+
