@@ -5,7 +5,7 @@
 
 /* ✅ Custom style for react-datepicker */
 .react-datepicker__day--highlighted-custom {
-  background-color: #dcba30;
+  background-color: #28eb1a;
   color: black;
   border-radius: 50%;
 }

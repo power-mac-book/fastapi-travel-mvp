@@ -10,6 +10,8 @@ class TravelRequestCreate(BaseModel):
 
 class TravelRequestOut(TravelRequestCreate):
     id: int
+    travel_date: date
+    num_persons: int
 
     class Config:
         orm_mode = True

@@ -61,10 +61,11 @@ useEffect(() => {
   }
 
   return (
-    <form
+    <div className="mt-6 flex justify-end">   
+      <form
       onSubmit={handleSubmit}
-      className="mt-6 p-6 bg-white border border-gray-200 rounded shadow-md"
-    >
+      className=" bg-white rounded-lg"
+  >
       <h3 className="text-xl font-semibold mb-4">
         Show Interest in "{selectedDestination.name}"
       </h3>
@@ -121,10 +122,10 @@ useEffect(() => {
         type="submit"
         className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
       >
-        Submit
+        Enquire
       </button>
     </form>
-  );
+  </div>);
 };
 
 export default TravelForm;

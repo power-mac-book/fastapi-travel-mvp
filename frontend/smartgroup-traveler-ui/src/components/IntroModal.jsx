@@ -5,8 +5,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css';
 
 const sampleImages = [
+  "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
   "https://images.unsplash.com/photo-1493558103817-58b2924bce98",
-  "https://images.unsplash.com/photo-1526779259212-9393f5b1c97b",
   "https://images.unsplash.com/photo-1560347876-aeef00ee58a1",
 ];
 
@@ -38,14 +38,14 @@ const SlideshowModal = () => {
              modules={[Autoplay]}
              autoplay={{ delay: 2500 }}
             loop
-            className="h-full w-full"
+            className="h-80 w-100"
           >
             {sampleImages.map((src, idx) => (
               <SwiperSlide key={idx}>
                 <img
                   src={`${src}?auto=format&fit=crop&w=800&q=80`}
                   alt={`Slide ${idx}`}
-                  className="w-full h-full object-cover"
+                  className="w-100 h-80 object-cover rounded"
                 />
               </SwiperSlide>
             ))}

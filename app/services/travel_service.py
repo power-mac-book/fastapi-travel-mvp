@@ -27,7 +27,7 @@ def create_travel_request(db: Session, data: TravelRequestCreate) -> TravelReque
         f"Phone: {data.phone_number}\n"
         f"Persons: {data.num_persons}\n"
     )
-    send_email(subject, body, [data.user_email, settings.ADMIN_EMAIL])
+    #send_email(subject, body, [data.user_email, settings.ADMIN_EMAIL])
     # 2. Notify other travelers with similar interest ±7 days
     similar_date_start = data.travel_date - timedelta(days=7)
     similar_date_end = data.travel_date + timedelta(days=7)
@@ -45,7 +45,7 @@ def create_travel_request(db: Session, data: TravelRequestCreate) -> TravelReque
             f"around {data.travel_date}. You may be grouped together for better deals!\n\n"
             f"Stay tuned for further updates!"
         )
-        send_email(match_subject, match_body, [other.user_email])
+       # send_email(match_subject, match_body, [other.user_email])
     return travel
 
 #def list_travel_requests(db: Session):
