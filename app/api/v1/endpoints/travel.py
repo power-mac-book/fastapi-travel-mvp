@@ -1,11 +1,15 @@
 from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks
 from sqlalchemy.orm import Session
+from sqlalchemy import func
 from app.db.session import get_db
 from app.schemas.travel import TravelRequestCreate, TravelRequestOut
 from app.services.travel_service import create_travel_request, list_travel_requests, group_travel_requests, get_trending_destinations
 from typing import List, Optional
 from datetime import date
 from app.tasks.email_tasks import send_interest_emails
+from app.models.travel import TravelRequest
+from app.schemas.travel import TravelRequestOut
+from app.core.config import settings
 
 router = APIRouter()
 
@@ -48,3 +52,24 @@ def submit_travel_request(
 @router.get("/trending", tags=["Public"])
 def trending_destinations(db: Session = Depends(get_db)):
     return get_trending_destinations(db)
+
+@router.get("/destination-interest-dates/{destination_name}")
+def get_interest_dates(destination_name: str, db: Session = Depends(get_db)):
+    results = (
+        db.query(
+            TravelRequest.travel_date,
+            func.count(TravelRequest.id).label("interest_count")
+        )
+        .filter(TravelRequest.destination == destination_name)
+        .group_by(TravelRequest.travel_date)
+        .order_by(TravelRequest.travel_date)
+        .all()
+    )
+
+    # Convert results to list of dicts
+    return [
+        {"travel_date": r.travel_date, "interest_count": r.interest_count}
+        for r in results
+    ]
+
+

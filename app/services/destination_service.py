@@ -23,7 +23,13 @@ def create_destination(db: Session, destination: DestinationCreate) -> Destinati
     new_destination = Destination(
         name=destination.name,
         description=destination.description,
-        image_path=destination.image_path
+        image_path=destination.image_path,
+        itinerary =destination.itinerary,
+        gallery=destination.gallery,
+        highlights = destination.highlights,
+        exclusions= destination.exclusions,
+        inclusions = destination.inclusions
+        
     )
     db.add(new_destination)
     db.commit()
