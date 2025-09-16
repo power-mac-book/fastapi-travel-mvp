@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
-from app.models.user import AdminUser
-from app.core.security import verify_password, create_access_token
+from app.models.admin_user import AdminUser
+from app.core.security import verify_password
+from app.core.token import create_access_token, blacklist_token, is_token_blacklisted
 from datetime import timedelta
 
 def authenticate_admin_user(db: Session, email: str, password: str):

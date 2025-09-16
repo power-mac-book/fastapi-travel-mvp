@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from app.models.user import AdminUser
+from app.models.admin_user import AdminUser
 from app.schemas.admin_user import AdminUserCreate, AdminUserOut
 from app.core.security import hash_password
 from app.db.session import get_db

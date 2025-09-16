@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from .endpoints import travel, dashboard, cms, admin_route, auth
+from .endpoints import travel, dashboard, cms, admin_route, auth, test
 
 api_router = APIRouter()
 
@@ -19,3 +19,5 @@ api_router.include_router(admin_route.router, prefix="/admin_route", tags=["Admi
 
 api_router.include_router(auth.router, prefix="/auth", tags=["Auth"])
 
+# Test endpoints (only in development)
+api_router.include_router(test.router, prefix="/test", tags=["Test"])
