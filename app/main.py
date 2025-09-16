@@ -13,8 +13,8 @@ uploads_path = os.path.join(os.path.dirname(__file__), "uploads")
 app.mount("/uploads", StaticFiles(directory=uploads_path), name="uploads")
 
 @app.on_event("startup")
-#def startup():
-    #init_db()
+def startup():
+    init_db()
 
 @app.get("/healthz")
 def health_check():

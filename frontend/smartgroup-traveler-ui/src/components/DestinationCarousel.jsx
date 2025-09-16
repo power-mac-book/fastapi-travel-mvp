@@ -1,7 +1,6 @@
-// src/components/DestinationCarousel.jsx
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules"; 
+import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -12,15 +11,19 @@ const DestinationCarousel = ({ destinations }) => {
         Book Now @ ₹1: Lock your Holiday Package Price
       </h2>
       <Swiper
-        modules={[Navigation]}
-        spaceBetween={16}
+        modules={[Navigation, Autoplay]}
+        spaceBetween={24}
         slidesPerView={1}
         navigation
+        loop={true}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+        }}
         breakpoints={{
-          320: { slidesPerView: 1 },
-         // 576: { slidesPerView: 2 },
-         // 768: { slidesPerView: 3 },
-         // 1024: { slidesPerView: 4 },
+          576: { slidesPerView: 2 },
+          768: { slidesPerView: 2.5 },
+          1024: { slidesPerView: 3 },
         }}
       >
         {destinations.map((dest) => (
@@ -28,17 +31,19 @@ const DestinationCarousel = ({ destinations }) => {
             <div
               style={{
                 position: "relative",
-                borderRadius: "8px",
+                borderRadius: "10px",
                 overflow: "hidden",
                 cursor: "pointer",
-                boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+                boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+                transition: "transform 0.3s ease",
               }}
               onClick={() => window.alert(`Clicked ${dest.name}`)}
+              className="group"
             >
               <img
                 src={`http://localhost:8000/uploads/${dest.image_path}`}
                 alt={dest.name}
-                style={{ width: "100%", height: "200px", objectFit: "cover" }}
+                className="w-full h-[240px] object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
               />
               <div
                 style={{
@@ -48,11 +53,13 @@ const DestinationCarousel = ({ destinations }) => {
                   right: 0,
                   background: "linear-gradient(transparent, rgba(0,0,0,0.7))",
                   color: "#fff",
-                  padding: "0.5rem",
+                  padding: "0.75rem",
                   textAlign: "center",
+                  fontWeight: "600",
+                  fontSize: "1rem",
                 }}
               >
-                <strong>{dest.name}</strong>
+                {dest.name}
               </div>
             </div>
           </SwiperSlide>

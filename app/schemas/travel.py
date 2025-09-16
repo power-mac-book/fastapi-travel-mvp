@@ -15,3 +15,9 @@ class TravelRequestOut(TravelRequestCreate):
 
     class Config:
         orm_mode = True
+
+class PaginatedTravelResponse(BaseModel):
+    requests: list[TravelRequestOut]
+    total: int
+    page: int
+    limit: int

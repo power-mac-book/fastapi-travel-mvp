@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 from app.db.session import get_db
-from app.schemas.travel import TravelRequestCreate, TravelRequestOut
+from app.schemas.travel import TravelRequestCreate, TravelRequestOut, PaginatedTravelResponse
 from app.services.travel_service import create_travel_request, list_travel_requests, group_travel_requests, get_trending_destinations
 from typing import List, Optional
 from datetime import date
@@ -13,13 +13,19 @@ from app.core.config import settings
 
 router = APIRouter()
 
-@router.post("/", response_model=TravelRequestOut, status_code =201)
-def submit_travel_request(request: TravelRequestCreate, db: Session = Depends(get_db)):
-    return create_travel_request(db, request)
+# @router.post("/", response_model=TravelRequestOut, status_code =201)
+# def submit_travel_request(request: TravelRequestCreate, db: Session = Depends(get_db)):
+#     return create_travel_request(db, request)
 
-@router.get("/", response_model=List[TravelRequestOut])
-def get_travel_requests(destination: Optional[str] = None, user_email: Optional[str] = None, db: Session = Depends(get_db)):
-    return list_travel_requests(db, destination, user_email)
+@router.get("/", response_model=PaginatedTravelResponse)
+def get_travel_requests(
+    destination: Optional[str] = None, 
+    user_email: Optional[str] = None, 
+    page: int = 1, 
+    limit: int = 10,
+    db: Session = Depends(get_db)
+):
+    return list_travel_requests(db, destination, user_email, page, limit)
     
 @router.get("/grouped", response_model=list[dict])
 def get_grouped_requests(db: Session = Depends(get_db)):
