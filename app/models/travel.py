@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Date, ForeignKey
+from sqlalchemy import Column, Integer, String, Date, ForeignKey, Boolean
 from app.models.base import Base
 
 class TravelRequest(Base):
@@ -10,3 +10,4 @@ class TravelRequest(Base):
     user_email = Column(String, nullable=False)
     phone_number = Column(String, nullable=True)
     num_persons = Column(Integer, nullable=True)
+    #seen = Column(Boolean, default=False)

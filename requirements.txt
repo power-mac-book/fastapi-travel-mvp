@@ -14,4 +14,6 @@ email-validator        # For validating email fields
 httpx                  # For making HTTP calls if needed
 alembic                # For DB migrations if you add it later
 aiosmtplib				#smtp lib
+python-jose[cryptography]
+passlib[bcrypt]
 

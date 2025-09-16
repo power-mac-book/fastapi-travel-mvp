@@ -48,16 +48,35 @@ def create_travel_request(db: Session, data: TravelRequestCreate) -> TravelReque
        # send_email(match_subject, match_body, [other.user_email])
     return travel
 
-#def list_travel_requests(db: Session):
-    #return db.query(TravelRequest).all()
+# def list_travel_requests(db: Session):
+#     return db.query(TravelRequest).all()
 
-def list_travel_requests(db: Session, destination: str = None, user_email: str = None):
+def list_travel_requests(
+    db: Session, 
+    destination: str = None, 
+    user_email: str = None,
+    page: int = 1,
+    limit: int = 10
+):
     query = db.query(TravelRequest)
     if destination:
         query = query.filter(TravelRequest.destination == destination)
     if user_email:
         query = query.filter(TravelRequest.user_email == user_email)
-    return query.all()
+    
+    # Get total count before pagination
+    total = query.count()
+    
+    # Add pagination
+    offset = (page - 1) * limit
+    requests = query.order_by(TravelRequest.travel_date.desc()).offset(offset).limit(limit).all()
+    
+    return {
+        "requests": requests,
+        "total": total,
+        "page": page,
+        "limit": limit
+    }
     
     
 def group_travel_requests(db: Session) -> list[dict]:
